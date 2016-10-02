@@ -1,0 +1,14 @@
+<% 
+    //一共有三个变量，分别是 articles user collectinfo
+    if(articles.length >= 0)
+        articles = articles[0];
+    var a = articles;
+    console.log("前端控制",a);
+%>
+<%- 
+    partial("./article/article-content.ejs",{
+        className:'nk-block-blue',
+        title:a.articleTitle,
+        body:a.articleContent
+    }); 
+%>

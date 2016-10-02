@@ -1,0 +1,45 @@
+    <div class="background" style="background-image:url(<%- background %>)"></div>
+    <div class="main clearfix">
+        <div class="right-page left">
+        <div class="main-title"><h1>南开腾讯创新俱乐部</h1></div>            
+                <div class="main-blocks-left main-blocks left">
+                    <%- include ./index/block-list.ejs %>
+                </div>
+        </div>
+        
+        <div class="left-page left">
+            <div class="main-introduce ps-page-active" id="introduce" data-ps-page >
+                <%- include ./index/introduce %>
+            </div>
+            <div class="main-article-list" id="article-list" data-ps-page >
+            <% console.log(articles);%>
+            <% for(var i = 0 ,a = articles;i < articles.length;i++){%>
+                <%- partial("./article/article.ejs",{
+                                        className:"nk-block-blue",
+                                        userNick:a[i].userNick,
+                                        title:a[i].articleTitle,
+                                        date:a[i].publicTime,
+                                        likeNum:a[i].readNum,
+                                        collectNum:a[i].collectNum,
+                                        attr:"data-article-id=\""+a[i].articleId+"\""
+                                    });
+                %>
+            <% } %>
+            </div>
+
+            <div id="main-activity-list" data-ps-page  ></div>
+            <div id="main-famehall-list" data-ps-page ></div>
+            <div id="main-course-list" data-ps-page ></div>
+            <div id="main-signup" data-ps-page >
+                <% include ./auth/signup.ejs %>
+            </div>
+            <div id="main-login" data-ps-page>
+                <% include ./auth/login.ejs %>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer clearfix">
+        <%- include ./index/footer.ejs %>
+    </div>
+
