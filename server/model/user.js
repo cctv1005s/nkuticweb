@@ -1,16 +1,28 @@
 var  util = require('util');
 var mysql = require('../db/db');
 
-exports.SelectUser = function(UserID,cb){
-    console.log("----------SelectUser:%s----------",UserID);
-    var query = "Select * from User where UserID = "+UserID;
+exports.getUserByID = function(UserID,cb){
+    console.log("----------getUserByID:%s----------",UserID);
+    var query = "Select * from User where UserID = '%s'";
+    query = util.format(query,UserID);
+    mysql.query(query,cb);
+}
+
+exports.getUserByName = function(UserName,cb){
+    console.log("----------getUserByName:%s----------",UserName);
+    var query = "Select * from User where UserName = '%s'";
+    query = util.format(query,UserName);
     mysql.query(query,cb);
 }
 
 exports.InsertUser = function(User,cb){
     console.log("----------InserUser:%s----------",User);
+    var AddUser = [];
+    for(var i in User){
+        AddUser.push(User[i]);
+    }
     var query = "INSERT INTO USER (UserID,UserName,UserNick,UserPassword,Profile,UserState,UserPermission) VALUES (?,?,?,?,?,?,?)"
-    mysql.query(query,User,cb);
+    mysql.query(query,AddUser,cb);
 }
 
 exports.UpdateUser = function(UserID,User,cb){

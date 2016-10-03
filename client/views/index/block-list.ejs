@@ -1,56 +1,94 @@
 
-                    <%- partial('./model/block',{
-                        className:"nk-block-blue nk-block-all left",
-                        attr:"data-ps-control data-ps-hover=\"#introduce\"",
-                        icon:"qq",
-                        title:"历史",
-                        subtitle:"关于俱乐部的历史"
-                    }); %>
+<%
+    var blocks = [
+            {
+                className:"nk-block-blue nk-block-all left",
+                attr:"data-ps-control data-ps-hover=\"#introduce\"",
+                icon:"qq",
+                title:"历史",
+                subtitle:"关于俱乐部的历史"
+            },
+            {
+                className:"nk-block-grey nk-block-half left",
+                attr:"data-ps-control",
+                icon:"futbol-o",
+                title:"活动",
+                subtitle:"近期的活动"
+            },
+            {
+                className:"nk-block-blue nk-block-half left",
+                attr:"data-ps-control data-ps-hover=\"#article-list\" ",
+                icon:"bookmark",
+                title:"文章",
+                subtitle:"分享的文章"
+            },
+            {
+                className:"nk-block-grey nk-block-half left",
+                attr:"data-ps-control",
+                icon:"bank",
+                title:"名人堂",
+                subtitle:"历届优秀成员"
+            },
+            {
+                className:"nk-block-blue nk-block-half left",
+                attr:"data-ps-control",
+                icon:"book",
+                title:"课程",
+                subtitle:"精品课程"
+            },
+            {
+                className:"nk-block-red nk-block-all left",
+                attr:"data-ps-control data-ps-hover=\"#main-signup\"",
+                icon:"smile-o",
+                title:"加入我们",
+                subtitle:"注册一个吧"
+            },
+            {
+                className:"nk-block-red nk-block-half left",
+                attr:"data-ps-control data-ps-hover=\"#main-login\"",
+                icon:"star",
+                title:"登录",
+                subtitle:""
+            }
+    ]
 
-                    <%- partial('./model/block',{
-                        className:"nk-block-grey nk-block-half left",
-                        attr:"data-ps-control",
-                        icon:"futbol-o",
-                        title:"活动",
-                        subtitle:"近期的活动"
-                    }); %>                        
-                    
-                    <%- partial('./model/block',{
-                        className:"nk-block-blue nk-block-half left",
-                        attr:"data-ps-control data-ps-hover=\"#article-list\" ",
-                        icon:"bookmark",
-                        title:"文章",
-                        subtitle:"分享的文章"
-                    }); %>
-                    
-                    <%- partial('./model/block',{
-                        className:"nk-block-grey nk-block-half left",
-                        attr:"data-ps-control",
-                        icon:"bank",
-                        title:"名人堂",
-                        subtitle:"历届优秀成员"
-                    }); %>
-                    
-                    <%- partial('./model/block',{
-                        className:"nk-block-blue nk-block-half left",
-                        attr:"data-ps-control",
-                        icon:"book",
-                        title:"课程",
-                        subtitle:"精品课程"
-                    }); %>
 
-                    <%- partial('./model/block',{
-                        className:"nk-block-red nk-block-all left",
-                        attr:"data-ps-control data-ps-hover=\"#main-signup\"",
-                        icon:"smile-o",
-                        title:"加入我们",
-                        subtitle:"注册一个吧"
-                    }); %>
+    //如果用户已经登录
+    if(User){
+        var userBlocks =[
+                {
+                    className:"nk-block-red nk-block-half left",
+                    attr:"data-ps-control ",
+                    icon:"smile-o",
+                    title:User.UserNick,
+                    subtitle:"你好"
+                },
+                {
+                    className:"nk-block-red nk-block-half left",
+                    attr:"data-ps-control",
+                    icon:"bookmark",
+                    title:"我的",
+                    subtitle:"我的一切"
+                },
+                {
+                    className:"nk-block-red nk-block-half left",
+                    attr:"data-ps-control",
+                    icon:"pencil",
+                    title:"写文章",
+                    subtitle:"分享一下"
+                }
+        ]
 
-                    <%- partial('./model/block',{
-                        className:"nk-block-red nk-block-half left",
-                        attr:"data-ps-control data-ps-hover=\"#main-login\"",
-                        icon:"star",
-                        title:"登录",
-                        subtitle:""
-                    }); %>
+        blocks = blocks.slice(0, blocks.length - 2);
+        blocks = blocks.concat(userBlocks);
+    }
+
+
+%>
+<% for(var i = 0; i < blocks.length;i++){ %>
+
+<%-
+    partial('./model/block',blocks[i]);
+%>
+
+<% } %>

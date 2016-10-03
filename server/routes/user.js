@@ -22,7 +22,7 @@ exports.select = function(req,res,next){
 exports.add = function(req,res,next){
     var post = req.body;
     
-    var User = {
+    var UserInfo = {
         UserID:uuid.v1(),
         UserName:post.UserName,
         UserNick:post.UserNick,
@@ -33,12 +33,16 @@ exports.add = function(req,res,next){
     };
 
     //在数据库中插入User
-    User.InsertUser(User,function(err,data){
+    User.InsertUser(UserInfo,function(err,data){
         if(err){
+            console.log(err);
             return next(err);
         }
         res.json(getResData(100,User,""));
+        //实际上不应该这么做的，但是比较懒就这样好了。
+        req.session.user = data;
     });
+
 }
 
 /**
@@ -46,7 +50,7 @@ exports.add = function(req,res,next){
 */
 exports.update = function(req,res,next){
     var UserID = req.params.userid;
-    var User = req.body;
+    var UserInfo = req.body;
     User.UpdateUser(UserID,User,function(err,data){
         if(err){
             return next(err);
@@ -79,5 +83,26 @@ exports.getArticles = function(req,res,next){
     });
 }
 
+exports.login = function(req,res,next){
+    var post = req.body;
+    console.log(post);
+    User.getUserByName(post.UserName,function(err,data){
+        if(err){
+            console.log(err);
+            return res.json(getResData(-100,err,""));
+        }
+        data = Array2Object(data);
+        if(data.UserPassword == post.UserPassword&&data){
+            req.session.user = data;
+            res.json(getResData(100,data,""));
+        }else{
+            res.json(getResData(-100,{},"用户名或密码错误"));
+        }
+    });
+}
 
-var getResData
+var Array2Object = function(arr){
+    if(arr.length >= 0)
+        arr = arr[0]; 
+    return arr;
+}

@@ -1,8 +1,13 @@
+
     <div class="main clearfix">
         <div class="right-page left">
         <div class="main-title"><h1>南开腾讯创新俱乐部</h1></div>            
                 <div class="main-blocks-left main-blocks left">
-                    <%- include ./index/block-list.ejs %>
+                    
+                    <%- partial("./index/block-list.ejs",{
+                        User:User
+                    }) %>
+
                 </div>
         </div>
         
@@ -12,7 +17,8 @@
             </div>
 
             <div class="main-article-list" id="article-list" data-ps-page >
-            <% for(var i = 0 ,a = articles;i < articles.length;i++){%>
+            
+            <% for(var i = 0 ,a = Article;i < Article.length;i++){%>
                 <%- partial("./article/article.ejs",{
                                         className:"nk-block-blue",
                                         userNick:a[i].userNick,
@@ -24,6 +30,7 @@
                                     });
                 %>
             <% } %>
+
             </div>
 
             <div id="main-activity-list" data-ps-page  ></div>
