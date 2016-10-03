@@ -1,4 +1,3 @@
-    <div class="background" style="background-image:url(<%- background %>)"></div>
     <div class="main clearfix">
         <div class="right-page left">
         <div class="main-title"><h1>南开腾讯创新俱乐部</h1></div>            
@@ -11,8 +10,8 @@
             <div class="main-introduce ps-page-active" id="introduce" data-ps-page >
                 <%- include ./index/introduce %>
             </div>
+
             <div class="main-article-list" id="article-list" data-ps-page >
-            <% console.log(articles);%>
             <% for(var i = 0 ,a = articles;i < articles.length;i++){%>
                 <%- partial("./article/article.ejs",{
                                         className:"nk-block-blue",
@@ -42,4 +41,3 @@
     <div class="footer clearfix">
         <%- include ./index/footer.ejs %>
     </div>
-

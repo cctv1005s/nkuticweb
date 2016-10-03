@@ -17,9 +17,7 @@ background-color: rgba(0,0,0,.2);
 background: rgba(255,255,255,.08);
 }
 
-
-
-.background{height: 100%;width: 100%;background-image: url(http://s.cn.bing.net/az/hprichbg/rb/MontVentoux_ZH-CN13938704019_1920x1080.jpg);position: absolute;left: 0;top: 0;z-index: -1;}
+.background{height: 100%;width: 100%;background-image: url(http://localhost:8080/img/background.jpg);position: absolute;left: 0;top: 0;z-index: -1;}
 .main{margin:0 100px 0 100px;padding: 100px}
 .main-blocks >div{margin: 5px;}
 .main-article-list > div{margin-bottom: 10px;}
@@ -43,7 +41,7 @@ background: rgba(255,255,255,.08);
 .nk-block-blue{background-color: rgba(41,167,216,0.8);}
 .nk-block-grey{background-color: rgba(219,229,231,0.8);}
 .nk-block-red{background-color:rgba(207,37,84,0.8); }
-.nk-block-green{background-color: rgba(108,94,14,0.8);}
+.nk-block-green{background-color: rgba(181,200,14,0.8);}
 .nk-block-icon{line-height: 155px;text-align: center;position: absolute;width: 100%;font-size: 70px;}
 .nk-block-blue .nk-block-icon{color: #fffbff;}
 .nk-block-grey .nk-block-icon{color: #555757;}
