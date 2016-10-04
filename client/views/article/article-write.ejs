@@ -4,7 +4,7 @@ var public = ["nk-write-public","nk-write-nopublic"];
 
 %>
 <div class="main clearfix">
-    <div class="right-page left">
+    <div class="right-page left" data-am-sticky>
         <div class="main-title"><h1>写文章</h1></div>            
         <div class="main-blocks-left main-blocks left">
             <div class="nk-block nk-block-grey nk-write-title">
@@ -42,14 +42,20 @@ var public = ["nk-write-public","nk-write-nopublic"];
     },0);
     
     var articleWrite = function(){
-        var editor = new wangEditor('article-write');
-        editor.create();
-
+        var editor = createEditor();
         //45秒自动保存一次
         setInterval(function(){
             saveArticle(editor);
         }, 1000*45);
         //监听ctrl+s
+        function keyDown(e){
+            var currKey=0, e=e||event||window.event;
+            currKey = e.keyCode||e.which||e.charCode;
+            if(currKey == 83 && (e.ctrlKey||e.metaKey)){
+                saveArticle(editor)
+                return false;
+            }
+        }
         document.onkeydown = keyDown;
         //监听发布和取消发布按钮,后面看代码的不要学我这么写，我是懒才不封装的
         $('body').on('click', '.nk-public', function(event) {
@@ -110,14 +116,51 @@ var public = ["nk-write-public","nk-write-nopublic"];
         }, 2000);
     }
 
-    function keyDown(e){
-        var currKey=0, e=e||event||window.event;
-        currKey = e.keyCode||e.which||e.charCode;
-        if(currKey == 83 && (e.ctrlKey||e.metaKey)){
-            saveArticle(editor)
-            return false;
-        }
+    var createEditor = function(){
+        var editor = new wangEditor('article-write');
+        // 上传图片
+        editor.config.uploadImgUrl = '/wangeditor';
+        // 表情显示项
+        editor.config.emotionsShow = 'value';
+
+        editor.config.menus = [
+        'bold',
+        'underline',
+        'italic',
+        'strikethrough',
+        'eraser',
+        'forecolor',
+        'bgcolor',
+        '|',
+        'quote',
+        'fontfamily',
+        'fontsize',
+        'head',
+        'unorderlist',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        '|',
+        'link',
+        'unlink',
+        'table',
+        'emotion',
+        '|',
+        'img',
+        'video',
+        'location',
+        'insertcode',
+        '|',
+        'undo',
+        'redo',
+        'fullscreen'
+         ];
+
+        editor.create();
+        return editor;
     }
+
 </script>
 
 

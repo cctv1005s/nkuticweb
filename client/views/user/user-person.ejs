@@ -1,0 +1,105 @@
+<%
+    var blocks = [
+        {
+            className:"nk-block-blue nk-block-half left",
+            attr:"data-ps-control data-ps-hover=\"#person-info\"",
+            icon:"gear",
+            title:"个人资料",
+            subtitle:""
+        },
+        {
+            className:"nk-block-red nk-block-all left",
+            attr:"data-ps-control data-ps-hover=\"#all-article\"",
+            icon:"book",
+            title:"全部",
+            subtitle:"全部文章"
+        },
+        {
+            className:"nk-block-green nk-block-half left",
+            attr:"data-ps-control data-ps-hover=\"#public-article\"",
+            icon:"external-link",
+            title:"已发布",
+            subtitle:"已发布的文章"
+        },
+        {
+            className:"nk-block-grey nk-block-half left",
+            attr:"data-ps-control data-ps-hover=\"#nopublic-article\"",
+            icon:"close",
+            title:"未发布",
+            subtitle:"未发布的文章"
+        },
+        {
+            className:"nk-block-red nk-block-half left",
+            attr:"data-ps-control data-ps-write",
+            icon:"pencil",
+            title:"写文章",
+            subtitle:"分享一下"
+        },
+        {
+            className:"nk-block-red nk-block-half left",
+            attr:"data-ps-control data-ps-clickhref data-ps-href=\"/user/logout\"",
+            icon:"mail-forward",
+            title:"登出",
+            subtitle:""
+        }
+    ]
+    
+    var all = [];
+    var nopublic = [];
+    var public = [];
+
+    var push2Array = function(atic,arr){
+        arr.push({
+                className:"nk-article-editable nk-block-blue",
+                userNick:atic.UserNick,
+                title:atic.ArticleTitle,
+                attr:"data-article-id=\""+atic.ArticleID+"\" data-main-article"
+        });
+        return arr;
+    }
+
+    //筛选
+    for(var i in Article){
+        all = push2Array(Article[i],all);
+        if(Article[i].ArticleState == 1){
+            nopublic = push2Array(Article[i],nopublic);
+        }
+        if(Article[i].ArticleState == 2){
+            public = push2Array(Article[i],public);
+        }
+    }
+%>
+
+
+<div class="main clearfix">
+    <div class="right-page left">
+        <div class="main-title"><h1>个人信息</h1></div>            
+        <div class="main-blocks-left main-blocks left">
+        <% for(var i in blocks){ %>
+            <%- partial('./model/block',blocks[i]) %>
+        <% } %>
+        </div>
+    </div>
+    
+    <div class="left-page left">
+        <div id="person-info" data-ps-page >
+            <h1>懒得做了....修改的事情以后再说吧</h1>
+        </div>
+        <div id="all-article" class="main-article-list" data-ps-page >
+            <% for(var i in all){%>
+                <%- partial("./article/article",all[i]) %>
+            <%}%>
+        </div>
+        <div id="public-article" data-ps-page >
+            <% for(var i in public){%>
+                <%- partial("./article/article",public[i]) %>
+            <%}%>
+        </div>
+
+        <div id="nopublic-article" data-ps-page >
+            <% for(var i in nopublic){%>
+                <%- partial("./article/article",nopublic[i]) %>
+            <%}%>
+        </div>
+    </div>
+</div>

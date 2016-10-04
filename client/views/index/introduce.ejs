@@ -1,6 +1,8 @@
-
-<%- partial('./article/article-content',{
-    className:"nk-block-blue",
-    title:"南开腾讯创新俱乐部",
-    body:"南开腾讯创新俱乐部是腾讯公司创立的一个社团，隶属于",
-}) %>
+<%
+    var data = {
+        className:"nk-block-blue",
+        title:"南开腾讯创新俱乐部",
+        body:Array2Object(Introduce).ArticleContent,
+    }
+%>
+<%- partial('./article/article-content',data) %>

@@ -2,7 +2,7 @@
     User = Array2Object(User);
     var block = {
             className:"nk-block-blue nk-block-all left",
-            attr:"data-ps-clickhref data-ps-href="/"",
+            attr:"data-ps-clickhref data-ps-clickhref data-ps-href=\""+"/user/"+User.UserID+"/show\"",
             icon:"smile-o",
             title:"作者 ： "+User.UserNick,
             subtitle:""
@@ -10,7 +10,7 @@
 %>
 
 <div class="main clearfix">
-    <div class="right-page left">
+    <div class="right-page left" data-am-sticky>
         <div class="main-title"><h1><%- Article.ArticleTitle %></h1></div>            
         <div class="main-blocks-left main-blocks left">
             <%- partial('./model/block',block) %>

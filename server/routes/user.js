@@ -31,20 +31,37 @@ exports.person = function(req,res,next){
             Article:article
         };
         //渲染界面
-        res.render('./user/user-show',data);
+        res.render('./user/user-person',data);
     });
 
     User.GetUserByID(userid,ep.done('User'));
 
-    Article.GetArticle({ArticleBelong:userid},ep.done('Article'));
+    Article.GetArticle({UserID:userid},ep.done('Article'));
 
     ep.fail(function(err){
-        return res.json(getResData(-100,{},err));
+        console.log(err);
+        return res.json(getResData('-100',{},err));
     })
 }
     
 exports.show = function(req,res,next){
-    
+    var ep = new eventproxy;
+    var userid = req.params.userid;
+    ep.all('User','Article',function(user,article){
+        var data = {
+            User:user,
+            Article:article
+        };
+        //渲染界面
+        res.render('./user/user-show',data);
+    });
+
+    User.GetUserByID(userid,ep.done('User'));
+    Article.GetArticle({UserID:userid,ArticleState:2},ep.done('Article'));
+    ep.fail(function(err){
+        console.log(err);
+        return res.json(getResData('-100',{},err));
+    })
 }
 
 
@@ -119,7 +136,7 @@ exports.getArticles = function(req,res,next){
 exports.login = function(req,res,next){
     var post = req.body;
     try{
-    User.getUserByName(post.UserName,function(err,data){
+    User.GetUserByName(post.UserName,function(err,data){
         if(err){
             console.log(err);
             return res.json(getResData(-100,err,""));
@@ -137,6 +154,12 @@ exports.login = function(req,res,next){
         console.log(e);
     }
 }
+
+exports.logout = function(req,res,next){
+    req.session.user = null;
+    res.render('./auth/logout');
+}
+
 
 var Array2Object = function(arr){
     if(arr.length >= 0)

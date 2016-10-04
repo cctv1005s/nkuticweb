@@ -7,7 +7,7 @@ var mysql = require('../db/db');
  * @params {string} UserID - 用户ID 
  * @params {function} cb - 回调函数
  */
-exports.getUserByID = function(UserID,cb){
+exports.GetUserByID = function(UserID,cb){
     console.log("----------getUserByID:%s----------",UserID);
     var query = "Select * from User where UserID = '%s'";
     query = util.format(query,UserID);
@@ -20,7 +20,7 @@ exports.getUserByID = function(UserID,cb){
  * @params {string} UserName - 用户名（账号）
  * @params {function} cb - 回调函数
  */
-exports.getUserByName = function(UserName,cb){
+exports.GetUserByName = function(UserName,cb){
     console.log("----------getUserByName:%s----------",UserName);
     var query = "Select * from User where UserName = '%s'";
     query = util.format(query,UserName);

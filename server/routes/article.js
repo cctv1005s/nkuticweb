@@ -30,7 +30,7 @@ exports.article = function(req,res,next){
     });
 
     ep1.all('UserID',function(UserID){
-        User.getUserByID(UserID,function(err,data){
+        User.GetUserByID(UserID,function(err,data){
             ep2.emit('User',data);
         });
     });

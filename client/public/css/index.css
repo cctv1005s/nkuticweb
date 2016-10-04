@@ -30,6 +30,7 @@ background: rgba(255,255,255,.08);
     color: #333;
 }
 
+
 .background{height: 100%;width: 100%;background-image: url(http://localhost:8080/img/background.jpg);position: fixed;left: 0;top: 0;z-index: -1;}
 .main{padding-top: 100px;width: 1519px;margin: 0 auto;}
 .main-blocks >div{margin: 5px;}
@@ -85,12 +86,13 @@ background: rgba(255,255,255,.08);
 .nk-article-content{width: 100%;overflow: auto;padding:10px;}
 .nk-article-content-title{font-size: 36px;}
 
-.nk-article-operator{position: absolute;right: 0;top: 0;transform: translateX(100%);transition: 0.5s;}
-.nk-article-operator:hover{transform: translateX(0);}
-.nk-article-operator-active{transform: translateX(0);}
+.nk-article-operator{position: absolute;right: 0;top: 0;transform: translateX(100%);transition: 0.5s;display: none;}
+.nk-article-editable .nk-article-operator{display: block;} 
+.nk-article:hover .nk-article-operator {transform: translateX(0) !important;}
+
 .nk-article-operator > div{height: 155px;width: 155px;line-height: 155px;font-size: 28px;text-align: center;float: left;}
-.nk-article-edit{background: green;color:#333;}
-.nk-article-delete{background: red;color: white;}
+.nk-article-edit{;color:#333;}
+.nk-article-delete{color: white;}
 
 /*page转换*/
 [data-ps-page]{transform: translateY(-100%);transition: 0.5s;position: absolute;left: 0;top: 0;width: 100%;}
@@ -119,8 +121,10 @@ background: rgba(255,255,255,.08);
 .nk-write-nopublic .nk-public{display: none;}
 .nk-nopublic:hover,.nk-public:hover{color: white;}
 
-
 .article-show{height: 100%;}
+
+/*个人信息*/
+.all-article
 
 @keyframes write-show
 {

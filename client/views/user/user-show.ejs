@@ -1,0 +1,57 @@
+<%
+    var blocks = [
+        {
+            className:"nk-block-blue nk-block-half left",
+            attr:"data-ps-control data-ps-hover=\"#person-info\"",
+            icon:"gear",
+            title:"个人资料",
+            subtitle:""
+        },
+        {
+            className:"nk-block-green nk-block-half left",
+            attr:"data-ps-control data-ps-hover=\"#public-article\"",
+            icon:"external-link",
+            title:"已发布",
+            subtitle:"已发布的文章"
+        }
+    ]
+    
+    var public = [];
+
+    var push2Array = function(atic,arr){
+        arr.push({
+                className:" nk-block-blue",
+                userNick:atic.UserNick,
+                title:atic.ArticleTitle,
+                attr:"data-article-id=\""+atic.ArticleID+"\" data-main-article"
+        });
+        return arr;
+    }
+    //筛选
+    for(var i in Article){
+        public = push2Array(Article[i],public);
+    }
+%>
+
+
+<div class="main clearfix">
+    <div class="right-page left">
+        <div class="main-title"><h1>个人信息</h1></div>            
+        <div class="main-blocks-left main-blocks left">
+        <% for(var i in blocks){ %>
+            <%- partial('./model/block',blocks[i]) %>
+        <% } %>
+        </div>
+    </div>
+    
+    <div class="left-page left">
+        <div id="person-info" data-ps-page >
+            <h1>懒得做了....修改的事情以后再说吧</h1>
+        </div>
+        <div id="public-article" data-ps-page >
+            <% for(var i in public){%>
+                <%- partial("./article/article",public[i]) %>
+            <%}%>
+        </div>
+    </div>
+</div>

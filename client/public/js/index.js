@@ -71,9 +71,23 @@ var login = function(){
     });
 }
 
+var edit = false;
+//监听文章跳转
 $("[data-main-article]").click(function(e) {
+    if(edit == true){
+        edit = false;
+        return ;
+    }
     var $elem = $(e.currentTarget);
     var id = $elem.attr('data-article-id');
     window.location.href = "/article/"+id;
+});
+
+$("[data-main-edit]").click(function(e) {
+    edit = true;
+    var $elem = $(e.currentTarget);
+    var $elem = $elem.parent().parent();
+    var id = $elem.attr('data-article-id');
+    window.location.href = "/article/"+id+"/write";
 });
 
