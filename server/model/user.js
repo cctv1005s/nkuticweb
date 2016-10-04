@@ -1,6 +1,12 @@
 var  util = require('util');
 var mysql = require('../db/db');
 
+/**
+ * 通过ID获取信息
+ *
+ * @params {string} UserID - 用户ID 
+ * @params {function} cb - 回调函数
+ */
 exports.getUserByID = function(UserID,cb){
     console.log("----------getUserByID:%s----------",UserID);
     var query = "Select * from User where UserID = '%s'";
@@ -8,6 +14,12 @@ exports.getUserByID = function(UserID,cb){
     mysql.query(query,cb);
 }
 
+/**
+ * 通过用户名（账号）获取信息
+ *
+ * @params {string} UserName - 用户名（账号）
+ * @params {function} cb - 回调函数
+ */
 exports.getUserByName = function(UserName,cb){
     console.log("----------getUserByName:%s----------",UserName);
     var query = "Select * from User where UserName = '%s'";
@@ -15,6 +27,12 @@ exports.getUserByName = function(UserName,cb){
     mysql.query(query,cb);
 }
 
+/**
+ * 插入用户
+ *
+ * @params {object} User - 用户条
+ * @params {function} cb - 回调函数
+ */
 exports.InsertUser = function(User,cb){
     console.log("----------InserUser:%s----------",User);
     var AddUser = [];
@@ -25,6 +43,13 @@ exports.InsertUser = function(User,cb){
     mysql.query(query,AddUser,cb);
 }
 
+/**
+ * 根据用户ID修改用户
+ *
+ * @params {string} UserID - 用户ID
+ * @params {object} User - 修改后的用户条
+ * @params {function} cb - 回调函数
+ */
 exports.UpdateUser = function(UserID,User,cb){
     console.log("----------UpdateUser:%s----------",UserID);
     

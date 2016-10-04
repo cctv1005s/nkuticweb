@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 var partials = require('express-partials');
 var config = require('./config.json');
@@ -27,11 +28,27 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(partials());
 
+var Array2Object = function(arr){
+  if(arr.length >= 0)
+    return arr[0]
+  return arr;
+}
+
+_.extend(app.locals,{
+  Array2Object:Array2Object
+})
+
 app.use(session({
     secret: 'nkuticweb-session',
     cookie: {
         maxAge: 7*24 * 60 * 60 * 60
     },
+    store:new RedisStore({
+      port: '6379',
+      host: '127.0.0.1',
+      db: 0,
+      pass:''
+    }),
     resave:false,
     saveUninitialized:false
 }));

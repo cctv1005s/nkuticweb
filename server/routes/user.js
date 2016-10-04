@@ -5,12 +5,19 @@ var User = require('../model/user');
 
 //封装返回数据
 var getResData = tool.getResData;
+/**
+* 把session中的user传递给前端
+*/
+exports.user = function(req,res,next){
+    res.json(JSON.stringify(req.session.user));
+}
+
 
 /**
 * 渲染"/user/:userid" 
 */
-exports.select = function(req,res,next){
-
+exports.person = function(req,res,next){
+    res.render('/model')
 }
 
 /**
@@ -21,7 +28,6 @@ exports.select = function(req,res,next){
 */
 exports.add = function(req,res,next){
     var post = req.body;
-    
     var UserInfo = {
         UserID:uuid.v1(),
         UserName:post.UserName,
@@ -77,15 +83,14 @@ exports.delete = function(req,res,next){
 */
 exports.getArticles = function(req,res,next){
     var UserID = req.params.userid;
-    
     User.getArticles(UserID,function(err,data){
-
     });
 }
 
+
 exports.login = function(req,res,next){
     var post = req.body;
-    console.log(post);
+    try{
     User.getUserByName(post.UserName,function(err,data){
         if(err){
             console.log(err);
@@ -99,6 +104,10 @@ exports.login = function(req,res,next){
             res.json(getResData(-100,{},"用户名或密码错误"));
         }
     });
+    }
+    catch(e){
+        console.log(e);
+    }
 }
 
 var Array2Object = function(arr){
