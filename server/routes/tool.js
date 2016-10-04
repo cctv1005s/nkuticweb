@@ -24,6 +24,9 @@ exports.Data2Content = function(data){
 }
 
 var Array2Object = function(arr){
+    if(!arr){
+        return null;
+    }
     if(arr.length >= 0)
         arr = arr[0]; 
     return arr;
