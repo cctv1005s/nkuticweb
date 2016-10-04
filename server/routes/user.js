@@ -2,6 +2,12 @@ var request = require('request');
 var tool = require('./tool');
 var uuid = require('node-uuid');
 var User = require('../model/user');
+var eventproxy = require('eventproxy');
+
+//数据库
+var User = require('../model/user');
+var Article = require('../model/article');
+
 
 //封装返回数据
 var getResData = tool.getResData;
@@ -17,8 +23,30 @@ exports.user = function(req,res,next){
 * 渲染"/user/:userid" 
 */
 exports.person = function(req,res,next){
-    res.render('/model')
+    var ep = new eventproxy;
+    var userid = req.params.userid;
+    ep.all('User','Article',function(user,article){
+        var data = {
+            User:user,
+            Article:article
+        };
+        //渲染界面
+        res.render('./user/user-show',data);
+    });
+
+    User.GetUserByID(userid,ep.done('User'));
+
+    Article.GetArticle({ArticleBelong:userid},ep.done('Article'));
+
+    ep.fail(function(err){
+        return res.json(getResData(-100,{},err));
+    })
 }
+    
+exports.show = function(req,res,next){
+    
+}
+
 
 /**
 * 新建用户

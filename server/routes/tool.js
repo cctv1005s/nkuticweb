@@ -1,4 +1,7 @@
 exports.getResData = function(Flag,Content,Extra){
+    if(typeof Extra == 'object')
+        Extra = JSON.stringify(Extra);
+    
     var resData = {
         Flag:100,//标志位
         Content:JSON.stringify(Content),//返回内容
