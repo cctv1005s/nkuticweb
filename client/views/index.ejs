@@ -21,13 +21,10 @@
             <% for(var i = 0 ,a = Article;i < Article.length;i++){%>
                 <%- partial("./article/article.ejs",{
                                         className:"nk-block-blue",
-                                        userNick:a[i].userNick,
-                                        title:a[i].articleTitle,
-                                        date:a[i].publicTime,
-                                        likeNum:a[i].readNum,
-                                        collectNum:a[i].collectNum,
-                                        attr:"data-article-id=\""+a[i].articleId+"\""
-                                    });
+                                        userNick:a[i].UserNick,
+                                        title:a[i].ArticleTitle,
+                                        attr:"data-article-id=\""+a[i].ArticleID+"\" data-main-article"
+                    });
                 %>
             <% } %>
 

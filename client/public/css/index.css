@@ -30,11 +30,11 @@ background: rgba(255,255,255,.08);
     color: #333;
 }
 
-.background{height: 100%;width: 100%;background-image: url(http://localhost:8080/img/background.jpg);position: absolute;left: 0;top: 0;z-index: -1;}
-.main{margin:0 100px 0 100px;padding: 100px}
+.background{height: 100%;width: 100%;background-image: url(http://localhost:8080/img/background.jpg);position: fixed;left: 0;top: 0;z-index: -1;}
+.main{padding-top: 100px;width: 1519px;margin: 0 auto;}
 .main-blocks >div{margin: 5px;}
 .main-article-list > div{margin-bottom: 10px;}
-.footer{margin: 0 200px;position: absolute;bottom: 10px;}
+.footer{margin: 0 200px;position: fixed;bottom: 10px;}
 .footer > div{margin-left: 5px;margin-right: 5px;}
 .right-page{width: 555px;}
 .left-page{width: 700px;margin-top: 78px;height: 600px;overflow: auto;position:relative;}
@@ -108,3 +108,41 @@ background: rgba(255,255,255,.08);
 .nk-button{width: 150px;height: 50px;color: #333;font-size: 1.3em;margin: 1em;background:rgba(207,37,84,0.8); line-height: 50px;border-radius: 5px;cursor: pointer;}
 
  
+ /*写文章*/
+.nk-write-title{height: 200px;}
+[data-public-check]{padding: 20px;font-size: 20px;}
+.nk-write-state{padding: 20px;font-size: 20px;opacity: 0;}
+.wangEditor-container{background-color: rgba(219,229,231,0.8) !important;}
+.wangEditor-menu-container{background: none !important;}
+.nk-write-state-show{-moz-animation:write-show 2s; /* Firefox */-webkit-animation:write-show 2s; /* Safari and Chrome */-o-animation:write-show 2s; /* Opera */}
+.nk-write-public .nk-nopublic{display: none;}
+.nk-write-nopublic .nk-public{display: none;}
+.nk-nopublic:hover,.nk-public:hover{color: white;}
+
+
+.article-show{height: 100%;}
+
+@keyframes write-show
+{
+0%   {opacity: 1;}
+25%  {opacity: 0.75;}
+50%  {opacity: 0.5;}
+100% {opacity: 0;}
+}
+
+@-webkit-keyframes write-show
+{
+0%   {opacity: 1;}
+25%  {opacity: 0.75;}
+50%  {opacity: 0.5;}
+100% {opacity: 0;}
+}
+
+@-o-keyframes write-show
+{
+0%   {opacity: 1;}
+25%  {opacity: 0.75;}
+50%  {opacity: 0.5;}
+100% {opacity: 0;}
+}
+

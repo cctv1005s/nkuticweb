@@ -1,14 +1,27 @@
-<% 
-    //一共有三个变量，分别是 articles user collectinfo
-    if(articles.length >= 0)
-        articles = articles[0];
-    var a = articles;
-    console.log("前端控制",a);
+<%
+    User = Array2Object(User);
+    var block = {
+            className:"nk-block-blue nk-block-all left",
+            attr:"data-ps-clickhref data-ps-href="/"",
+            icon:"smile-o",
+            title:"作者 ： "+User.UserNick,
+            subtitle:""
+        }
 %>
-<%- 
-    partial("./article/article-content.ejs",{
-        className:'nk-block-blue',
-        title:a.articleTitle,
-        body:a.articleContent
-    }); 
-%>
+
+<div class="main clearfix">
+    <div class="right-page left">
+        <div class="main-title"><h1><%- Article.ArticleTitle %></h1></div>            
+        <div class="main-blocks-left main-blocks left">
+            <%- partial('./model/block',block) %>
+        </div>
+    </div>
+    
+    <div class="left-page left article-show">
+        <%- partial('./article/article-content',{
+            className:"nk-block-grey",
+            title:Article.ArticleTitle,
+            body:Article.ArticleContent
+        })%>
+    </div>
+</div>

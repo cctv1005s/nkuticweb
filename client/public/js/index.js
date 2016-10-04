@@ -1,12 +1,27 @@
+var User = {};
 new paneSwitch('.left-page');
-
 $('[data-nk-article]').click(function(e) {
 });
 
+//不建议这么做，因为危险
+var getUser = function(){
+    $.ajax({
+        url:'/user',
+        type:'get',
+        success:function(data){
+            User = JSON.parse(data);
+        }
+    })
+}
+
+getUser();
+
+//注册
 $('.signup-button').click(function(event) {
     signup();
 });
 
+//登录
 $('.login-button').click(function(event) {
     login();
 });
@@ -55,3 +70,10 @@ var login = function(){
         }
     });
 }
+
+$("[data-main-article]").click(function(e) {
+    var $elem = $(e.currentTarget);
+    var id = $elem.attr('data-article-id');
+    window.location.href = "/article/"+id;
+});
+

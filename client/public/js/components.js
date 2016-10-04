@@ -43,6 +43,24 @@
                 self.disabled();
                 $elem.addClass(PS.state.active);
             });
+
+            //绑定写文章按钮
+            $('body').on('click', PS.btn.write, function(e) {
+                event.preventDefault();
+                //发起新建一个文章
+                newArticle(function(err,ArticleID){
+                    if(err){
+                        return alert(err);
+                    }
+                    window.location.href = "/article/"+ArticleID+"/write";
+                });
+            });
+
+            $('body').on('click',PS.btn.clickhref, function(e) {
+                var href = $(e.currentTarget).attr(PS.btn.href);
+                console.log(href);
+                window.location.href = href||"/";
+            });
         }
 
         PS.fn.disabled = function(){
@@ -52,13 +70,40 @@
             }
         }
 
+        var newArticle = function(cb){
+            $.ajax({
+                url:'/article/add',
+                type:'post',
+                data:{
+                    ArticleContent:"",
+                    ArticleTitle:"",
+                    ArticleBelong:User.UserID
+                },
+                success:function(data){
+                    var data = JSON.parse(data);
+                    if(data.Flag == 100){
+                        var ArticleID = JSON.parse(data.Content).ArticleID;
+                        cb(null,ArticleID);
+                    }else{
+                        alert("失败");
+                    }
+                }
+            });
+        }
+
         PS.btn = {};
-        PS.btn.control = "[data-ps-control]";
-        PS.btn.page = "[data-ps-page]";
+        
+        PS.btn.control = "[data-ps-control]";//控制按钮
+        PS.btn.page = "[data-ps-page]";//被控制的页面
         PS.btn.hover = "data-ps-hover";
         PS.btn.click = "data-ps-click";
+        PS.btn.clickhref = "[data-ps-clickhref]";//跳转按钮
+        PS.btn.href = "data-ps-href";//跳转链接
+
+        PS.btn.write = "[data-ps-write]";//写文章的按钮   
         PS.state  = {};
-        PS.state.active = "ps-page-active";
+
+        PS.state.active = "ps-page-active";//页面处于激活状态
     });
     
 })(jQuery)

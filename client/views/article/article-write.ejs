@@ -1,0 +1,123 @@
+<%
+var state = Article.ArticleState-1;
+var public = ["nk-write-public","nk-write-nopublic"];
+
+%>
+<div class="main clearfix">
+    <div class="right-page left">
+        <div class="main-title"><h1>写文章</h1></div>            
+        <div class="main-blocks-left main-blocks left">
+            <div class="nk-block nk-block-grey nk-write-title">
+                <div class="nk-block-body">
+                    <input class="nk-input" id="ArticleTitle" data-article-id="<%- Article.ArticleID %>" type="text" placeholder="标题" value="<%- Article.ArticleTitle %>"></input>
+                </div>
+            </div>
+            
+            <div class="nk-block nk-block-grey <%- public[state] %>" data-public-check >
+                <div class="nk-block-body">
+                    <i class="am-icon-external-link nk-public">发布</i>
+                    <i class="am-icon-close nk-nopublic">取消发布</i>
+                </div>
+            </div>
+
+            <div class="nk-block nk-block-grey nk-write-state">
+                <div class="nk-block-body">
+                    <i class="am-icon-check"></i>已保存
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="left-page left">
+        <div id="article-write" style="height:500px;" >
+            <%- Article.ArticleContent %>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    setTimeout(function(){
+        articleWrite();
+    },0);
+    
+    var articleWrite = function(){
+        var editor = new wangEditor('article-write');
+        editor.create();
+
+        //45秒自动保存一次
+        setInterval(function(){
+            saveArticle(editor);
+        }, 1000*45);
+        //监听ctrl+s
+        document.onkeydown = keyDown;
+        //监听发布和取消发布按钮,后面看代码的不要学我这么写，我是懒才不封装的
+        $('body').on('click', '.nk-public', function(event) {
+            publicArticle(editor,2);
+            $('[data-public-check]').removeClass('nk-write-public');
+            $('[data-public-check]').addClass('nk-write-nopublic');
+        });
+
+        $('body').on('click', '.nk-nopublic', function(event) {
+            publicArticle(editor,1);
+            $('[data-public-check]').removeClass('nk-write-nopublic');
+            $('[data-public-check]').addClass('nk-write-public');
+        });
+    }
+
+    var saveArticle = function(editor){
+        var $elem = $('#ArticleTitle');
+        var ArticleTitle = $elem.val();
+        var ArticleID = $elem.attr('data-article-id');
+        var ArticleContent =  editor.$txt.html();
+        $.ajax({
+            url:'/article/'+ArticleID+'/update',
+            type:'post',
+            data:{
+               ArticleTitle:ArticleTitle,
+               ArticleContent:ArticleContent
+            },
+            success:function(data){
+                console.log(data);
+            }
+        })
+        $('.nk-write-state').addClass('nk-write-state-show');
+        setTimeout(function(){
+            $('.nk-write-state').removeClass('nk-write-state-show');
+        }, 2000);
+    }
+
+    var publicArticle = function(editor,state){
+        var $elem = $('#ArticleTitle');
+        var ArticleTitle = $elem.val();
+        var ArticleID = $elem.attr('data-article-id');
+        var ArticleContent =  editor.$txt.html();
+        $.ajax({
+            url:'/article/'+ArticleID+'/update',
+            type:'post',
+            data:{
+               ArticleTitle:ArticleTitle,
+               ArticleContent:ArticleContent,
+               ArticleState:state
+            },
+            success:function(data){
+                console.log(data);
+            }
+        })
+        $('.nk-write-state').addClass('nk-write-state-show');
+        setTimeout(function(){
+            $('.nk-write-state').removeClass('nk-write-state-show');
+        }, 2000);
+    }
+
+    function keyDown(e){
+        var currKey=0, e=e||event||window.event;
+        currKey = e.keyCode||e.which||e.charCode;
+        if(currKey == 83 && (e.ctrlKey||e.metaKey)){
+            saveArticle(editor)
+            return false;
+        }
+    }
+</script>
+
+
