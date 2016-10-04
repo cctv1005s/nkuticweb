@@ -63,7 +63,7 @@ exports.UpdateArticle = function(ArticleID,Article,cb){
         set += util.format("%s = '%s' ,",i,Article[i]);
      }
      set = set.slice(0,set.length-1);
-     var query = util.format('update article set %s where ArticleID = \'%s\'',set,ArticleID);
+     var query = util.format('update Article set %s where ArticleID = \'%s\'',set,ArticleID);
      console.log(query);
      mysql.query(query,cb);
 }

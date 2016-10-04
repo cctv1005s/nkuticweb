@@ -31,7 +31,7 @@ background: rgba(255,255,255,.08);
 }
 
 
-.background{height: 100%;width: 100%;background-image: url(http://localhost:8080/img/background.jpg);position: fixed;left: 0;top: 0;z-index: -1;}
+.background{height: 100%;width: 100%;background-image: url(http://www.nkutic.com.cn:8080/img/background.jpg);position: fixed;left: 0;top: 0;z-index: -1;}
 .main{padding-top: 100px;width: 1519px;margin: 0 auto;}
 .main-blocks >div{margin: 5px;}
 .main-article-list > div{margin-bottom: 10px;}

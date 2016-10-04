@@ -59,7 +59,7 @@ exports.UpdateUser = function(UserID,User,cb){
     }
     set = set.slice(0,x.length-1);
 
-    var query = "Update USER set %s where UserID = %s";
+    var query = "Update User set %s where UserID = %s";
     query = util.format(query,set,UserID);
     mysql.query(query,cb);
 }
