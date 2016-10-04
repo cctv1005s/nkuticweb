@@ -68,3 +68,4 @@ exports.DeleteUser = function(UserID,cb){
     console.log("----------DeleteUser:%s----------",UserID);
     this.UpdateUser(UserID,{UserState:0},cb);
 }
+
