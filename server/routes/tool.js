@@ -14,6 +14,8 @@ exports.getResData = function(Flag,Content,Extra){
 
 exports.Data2Content = function(data){
     data = Array2Object(data);
+    if(!data)
+        return null;
     var id = data.ArticleID;
     var fileName = getFileName(id);
     var content = fs.readFileSync(fileName);

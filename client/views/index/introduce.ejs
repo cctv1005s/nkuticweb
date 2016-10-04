@@ -1,8 +1,12 @@
-<%
+<%  
+    if(!Introduce){
+        Introduce = {};
+        Introduce.ArticleContent = "";
+    }
     var data = {
         className:"nk-block-blue",
         title:"南开腾讯创新俱乐部",
-        body:Array2Object(Introduce).ArticleContent,
+        body:Array2Object(Introduce).ArticleContent||"",
     }
 %>
 <%- partial('./article/article-content',data) %>
