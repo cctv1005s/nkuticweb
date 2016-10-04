@@ -17,7 +17,9 @@
             </div>
 
             <div class="main-article-list" id="article-list" data-ps-page >
-            
+            <% if(!Article){
+                Article = [];
+            } %>
             <% for(var i = 0 ,a = Article;i < Article.length;i++){%>
                 <%- partial("./article/article.ejs",{
                                         className:"nk-block-blue",
