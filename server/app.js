@@ -87,7 +87,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-var port = "3033";
+var port = "80";
 app.listen(port||"3033")
 console.log("app listen on " + port);
 module.exports = app;
