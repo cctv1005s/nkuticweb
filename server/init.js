@@ -17,6 +17,8 @@ var sched={
     schedules:composite
 };
 later.date.localTime();  //设置本地时区
+//每日执行任务
+later.setInterval(getBackground,sched);
 
 var getBackground = function(){
     var bing = config.bing;
