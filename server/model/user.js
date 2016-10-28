@@ -9,7 +9,7 @@ var mysql = require('../db/db');
  */
 exports.GetUserByID = function(UserID,cb){
     console.log("----------getUserByID:%s----------",UserID);
-    var query = "Select * from User where UserID = '%s'";
+    var query = "Select * from user where UserID = '%s'";
     query = util.format(query,UserID);
     mysql.query(query,cb);
 }
@@ -22,7 +22,7 @@ exports.GetUserByID = function(UserID,cb){
  */
 exports.GetUserByName = function(UserName,cb){
     console.log("----------getUserByName:%s----------",UserName);
-    var query = "Select * from User where UserName = '%s'";
+    var query = "Select * from user where UserName = '%s'";
     query = util.format(query,UserName);
     mysql.query(query,cb);
 }
@@ -39,7 +39,7 @@ exports.InsertUser = function(User,cb){
     for(var i in User){
         AddUser.push(User[i]);
     }
-    var query = "INSERT INTO USER (UserID,UserName,UserNick,UserPassword,Profile,UserState,UserPermission) VALUES (?,?,?,?,?,?,?)"
+    var query = "INSERT INTO user (UserID,UserName,UserNick,UserPassword,Profile,UserState,UserPermission) VALUES (?,?,?,?,?,?,?)"
     mysql.query(query,AddUser,cb);
 }
 
@@ -59,7 +59,7 @@ exports.UpdateUser = function(UserID,User,cb){
     }
     set = set.slice(0,x.length-1);
 
-    var query = "Update User set %s where UserID = %s";
+    var query = "Update user set %s where UserID = %s";
     query = util.format(query,set,UserID);
     mysql.query(query,cb);
 }

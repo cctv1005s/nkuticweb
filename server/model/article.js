@@ -16,7 +16,7 @@ exports.InsertArticle = function(Article,cb){
         InsertArticle.push(Article[i]);
      }
      ArticleAttr = ArticleAttr.slice(0,ArticleAttr.length - 1);
-     var query = util.format("Insert Into Article (%s) values (?,?,?,?,?,?,?) ",ArticleAttr);
+     var query = util.format("Insert Into article (%s) values (?,?,?,?,?,?,?) ",ArticleAttr);
      mysql.query(query,InsertArticle,cb);
 }
 
@@ -28,7 +28,7 @@ exports.InsertArticle = function(Article,cb){
  */
 exports.GetArticleByID = function(ArticleID,cb){
     console.log("----------GetArticleByID:%s----------",ArticleID);
-    var query = util.format("select * from Article where ArticleID = '%s'",ArticleID);
+    var query = util.format("select * from article where ArticleID = '%s'",ArticleID);
     mysql.query(query,cb);
 }
 
@@ -63,7 +63,7 @@ exports.UpdateArticle = function(ArticleID,Article,cb){
         set += util.format("%s = '%s' ,",i,Article[i]);
      }
      set = set.slice(0,set.length-1);
-     var query = util.format('update Article set %s where ArticleID = \'%s\'',set,ArticleID);
+     var query = util.format('update article set %s where ArticleID = \'%s\'',set,ArticleID);
      console.log(query);
      mysql.query(query,cb);
 }
