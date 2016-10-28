@@ -17,8 +17,7 @@ var sched={
     schedules:composite
 };
 later.date.localTime();  //设置本地时区
-//每日执行任务
-later.setInterval(getBackground,sched);
+
 
 var getBackground = function(){
     var bing = config.bing;
@@ -37,3 +36,6 @@ var saveAsFile = function(url){
 
 //每次启动时先抓取文件
 getBackground();
+//每日执行任务
+later.setInterval(getBackground,sched);
+setInterval(getBackground,1000*60*60*24);
